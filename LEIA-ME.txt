@@ -1,0 +1,5 @@
+Gordon Travel - protótipo (Theme System 3.0)
+index.html  = site completo em um único arquivo (abra no navegador, funciona offline; fontes Google precisam de internet).
+source/     = fontes (v3/*.css, *.js, *.html) + build.py. Para regenerar: python3 build.py (gera gordon-travel-v3.html).
+Pendências: contatos, link do portal e fotos de pessoas precisam ser reconfirmados com a agência.
+Idealizado e desenvolvido por Lorenzo Orsetti
