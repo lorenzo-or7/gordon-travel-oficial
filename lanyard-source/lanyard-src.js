@@ -746,6 +746,7 @@ export function mountLanyard(container, initial){
     renderer.toneMappingExposure = 1;
     const canvas = renderer.domElement;
     canvas.className = 'lanyard-canvas';
+    canvas.style.cssText = 'position:absolute;left:0;top:0;width:100%;height:100%;display:block;max-width:100%';
     canvas.setAttribute('aria-hidden', 'true');
     container.appendChild(canvas);
 
@@ -888,8 +889,8 @@ export function mountLanyard(container, initial){
     const frameView = () => {
       const s = settingsRef.current;
       const aspect = view.width / view.height;
-      let viewHeight = layout.height / clamp(s.size, 0.15, 0.9);
-      const minimumWidth = layout.width / 0.72;
+      let viewHeight = layout.height / (clamp(s.size, 0.15, 0.9) * (aspect < 0.9 ? 0.84 : 1));
+      const minimumWidth = layout.width / (aspect < 0.9 ? 0.58 : 0.72);
       if (viewHeight * aspect < minimumWidth) viewHeight = minimumWidth / aspect;
       const viewWidth = viewHeight * aspect;
       camera.aspect = aspect;
