@@ -61,9 +61,9 @@ O arquivo `index.html` é a versão preparada para hospedagem estática. Para al
 
 ## Acessar o projeto
 
-**Versão no GitHub Pages:** https://lorenzo-or7.github.io/gordon-travel-v2/
+**Versão no GitHub Pages:** https://lorenzo-or7.github.io/gordon-travel-oficial/
 
-A hospedagem no domínio comercial será configurada separadamente; o endereço do GitHub Pages poderá mudar caso o repositório seja renomeado.
+O domínio comercial será configurado separadamente na hospedagem definitiva. O GitHub Pages é utilizado como publicação complementar.
 
 ## Publicação e cuidados
 
