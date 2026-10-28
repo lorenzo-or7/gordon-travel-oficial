@@ -1,54 +1,79 @@
-# Gordon Travel — Website Oficial ✈️
+# Gordon Travel ✈️
 
-Website institucional e experiência digital de turismo da **Gordon Travel**, com foco em planejamento personalizado de viagens, orientação para Orlando e atendimento humano.
+**Website institucional da Gordon Travel — Experiências Exclusivas.**
 
-**Desenvolvimento e identidade digital:** [Or7.dev](https://github.com/lorenzo-or7)
+Uma experiência digital desenvolvida para apresentar a agência, orientar viajantes com destino a Orlando e aproximar cada visitante do atendimento personalizado de **Marisa Gordon**.
 
-## Experiências do site
+**Projeto desenvolvido por [Or7](https://github.com/lorenzo-or7).**
 
-- **Início:** apresentação editorial da agência e credencial interativa da fundadora.
-- **Orlando Explorer:** hospedagem, parques, mobilidade, experiências e chegada.
-- **Gordon Services:** serviços organizados por etapas da jornada.
-- **Tickets:** informações e acesso aos canais parceiros.
-- **Gordon Journey:** experiência de planejamento personalizada.
-- **Nossa História:** trajetória de Marisa Gordon e registros históricos.
-- **Gordon Stories:** galeria de momentos reais de viagem.
-- **Travel Guide:** orientações e checklist interativo.
-- **Contato:** WhatsApp, canais sociais e compositor de mensagens.
+## Visão geral
 
-## Identidade e acessibilidade
+A Gordon Travel reúne informações, serviços e recursos interativos para quem está planejando uma viagem. A proposta visual combina direção de arte editorial, tons navy e champagne, fotografia real e navegação fluida no desktop e no celular.
 
-Design editorial responsivo, temas claro e escuro, navegação adaptada para smartphone e recursos interativos com atenção à acessibilidade.
+## Funcionalidades
+
+| Área | Experiência |
+| --- | --- |
+| **Home** | Apresentação da agência, destaques e credencial 3D interativa da fundadora |
+| **Orlando Explorer** | Informações e caminhos para explorar Orlando |
+| **Gordon Services** | Serviços apresentados conforme as etapas da viagem |
+| **Gordon Tickets** | Informações sobre ingressos e acesso aos canais parceiros |
+| **Gordon Journey** | Jornada interativa para iniciar o planejamento da viagem |
+| **Nossa História** | História da agência organizada em capítulos e registros fotográficos |
+| **Gordon Stories** | Galeria de viagens e experiências reais |
+| **Travel Guide** | Orientações, perguntas frequentes e checklist interativo |
+| **Contato** | Acesso ao WhatsApp, redes sociais e mensagens personalizadas |
+
+### Experiência e interface
+
+- Layout responsivo para desktop, tablet e smartphone.
+- Alternância entre os modos claro e escuro.
+- Identidade visual própria, com estética editorial.
+- Animações e microinterações pontuais.
+- Galeria com visualização ampliada.
+- Credencial **Lanyard 3D** com interação por ponteiro e toque.
+- Interface de preferências de cookies.
 
 ## Tecnologias
 
-HTML, CSS e JavaScript, com **Three.js** usado na credencial interativa Lanyard. Hospedagem compatível com GitHub Pages e hospedagem estática tradicional.
+- **HTML5, CSS3 e JavaScript** — interface e navegação.
+- **Three.js** — credencial tridimensional Lanyard integrada ao site, sem exigir React em tempo de execução.
+- **Python** — script de composição do site a partir dos arquivos-fonte.
+- **GitHub Pages** — publicação da versão hospedada no GitHub.
 
-## Publicação
+## Estrutura do projeto
 
-- **Repositório:** https://github.com/lorenzo-or7/gordon-travel-v2
-- **Prévia GitHub Pages:** https://lorenzo-or7.github.io/gordon-travel-v2/
-- **Domínio oficial:** será configurado após a validação da hospedagem.
+```text
+├── index.html                 # Site compilado, ponto de entrada
+├── assets/
+│   └── lanyard.bundle.js      # Bundle 3D utilizado na Home
+├── favicon.ico
+├── favicon-16x16.png
+├── favicon-32x32.png
+├── apple-touch-icon.png
+├── source/
+│   ├── build.py               # Processo de composição
+│   └── v3/                    # Fontes HTML, CSS e JavaScript
+└── lanyard-source/            # Código-fonte da experiência 3D
+```
 
-## Organização
+O arquivo `index.html` é a versão preparada para hospedagem estática. Para alterar funcionalidades, prefira editar os fontes correspondentes e atualizar a saída compilada de forma consistente.
 
-- `index.html`: página compilada para publicação.
-- `assets/`: dependências de frontend publicadas.
-- `source/`: código-fonte e scripts de construção.
-- `lanyard-source/`: fontes do Lanyard, quando disponíveis na versão final.
+## Acessar o projeto
 
-## Checklist antes do lançamento oficial
+**Versão no GitHub Pages:** https://lorenzo-or7.github.io/gordon-travel-v2/
 
-- [ ] Confirmar autorização de uso das fotografias, inclusive com menores.
-- [ ] Confirmar contatos e links da agência.
-- [ ] Revisar a Política de Privacidade e Cookies com dados reais.
-- [ ] Retirar avisos de protótipo da versão comercial.
-- [ ] Validar responsividade, acessibilidade, desempenho e links.
-- [ ] Configurar domínio e HTTPS na hospedagem definitiva.
+A hospedagem no domínio comercial será configurada separadamente; o endereço do GitHub Pages poderá mudar caso o repositório seja renomeado.
 
-> Este README descreve a versão comercial planejada. A publicação da nova versão depende de incorporar e validar o pacote final do site.
+## Publicação e cuidados
+
+O website funciona em hospedagem estática compatível com HTML, CSS e JavaScript. Antes de cada publicação comercial, confira os caminhos de arquivos, imagens, responsividade, links e navegação. Autorizações de uso das fotografias, informações legais e dados de contato devem ser validados com a agência.
+
+## Créditos
+
+**Gordon Travel — Experiências Exclusivas**  
+**Idealizado e desenvolvido por Or7 · Lorenzo Orsetti**
 
 ---
 
-**Gordon Travel** · Experiências exclusivas  
-*Idealizado e desenvolvido por Or7.*
+*Um projeto digital desenvolvido para transformar planejamento em experiências memoráveis.*
