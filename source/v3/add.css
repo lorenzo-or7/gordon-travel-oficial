@@ -497,6 +497,10 @@ html{scrollbar-width:auto;scrollbar-color:var(--gold) var(--bg)}
   .sv-tabs{display:flex;overflow-x:auto;scrollbar-width:none;scroll-snap-type:x proximity;margin-inline:-16px;padding-inline:16px}
   .sv-tabs::-webkit-scrollbar{display:none}
   .sv-tabs button{flex:0 0 auto;min-width:168px;scroll-snap-align:start;padding-right:1rem}
+  .sv-tabs{scroll-padding-inline:16px;overscroll-behavior-x:contain}
+  .sv-tabs.m-r{-webkit-mask-image:linear-gradient(90deg,#000 calc(100% - 44px),transparent);mask-image:linear-gradient(90deg,#000 calc(100% - 44px),transparent)}
+  .sv-tabs.m-l{-webkit-mask-image:linear-gradient(90deg,transparent,#000 44px);mask-image:linear-gradient(90deg,transparent,#000 44px)}
+  .sv-tabs.m-l.m-r{-webkit-mask-image:linear-gradient(90deg,transparent,#000 44px,#000 calc(100% - 44px),transparent);mask-image:linear-gradient(90deg,transparent,#000 44px,#000 calc(100% - 44px),transparent)}
 }
 @media (max-width:560px){
   .sv-panel{border-radius:22px}
@@ -1110,6 +1114,7 @@ html{scrollbar-width:auto;scrollbar-color:var(--gold) var(--bg)}
 .lny-stage{position:relative;min-height:clamp(480px,64vh,680px);border:1px solid var(--line);border-radius:6px;background:radial-gradient(90% 70% at 50% 0%,var(--surface) 0%,var(--surface-2) 100%);overflow:hidden}
 .lny-cv{position:absolute;inset:0}
 .lny-cv .lanyard{position:absolute;inset:0}
+.lny-cv .lanyard-canvas{position:absolute;inset:0;width:100%;height:100%;display:block;max-width:100%}
 .lny-fb{position:absolute;inset:0;display:none;place-items:center;padding:24px}
 .lny-fb img{max-height:100%;width:auto;max-width:min(300px,80%);border-radius:14px;box-shadow:var(--shadow);border:1px solid var(--edge)}
 .lny.is-fb .lny-fb{display:grid}.lny.is-fb .lny-cv{display:none}
@@ -1125,6 +1130,8 @@ html{scrollbar-width:auto;scrollbar-color:var(--gold) var(--bg)}
 .lny-copy p{color:var(--text-soft);max-width:48ch}
 .lny-ro{display:flex;gap:.7rem;flex-wrap:wrap;align-items:center;margin-top:.6rem}
 @media (max-width:860px){.lny{grid-template-columns:1fr}.lny-stage{min-height:clamp(440px,72vw,560px);order:2}.lny-copy{order:1}}
+.lny-flip,.lny-hint{white-space:nowrap}
+@media (max-width:400px){.lny-stage{min-height:500px}.lny-ctl{flex-direction:column;gap:.3rem;bottom:12px}.lny-hint{font-size:.7rem;letter-spacing:.1em}}
 
 /* ---- V2: rodapé (legal, Facebook, Or7) ---- */
 .foot .bot-l{display:grid;gap:.5rem;min-width:0}

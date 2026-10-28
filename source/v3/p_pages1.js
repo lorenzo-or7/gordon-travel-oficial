@@ -100,13 +100,14 @@ const Svc={ph:'planeje',openId:'',
     <div class="sv-reg" id="sd-${s.id}" role="region" aria-labelledby="sb-${s.id}"><div><div class="sv-in"><p class="sv-type"><i class="dot ${s.who}"></i><span><b>${WHO[s.who]}</b>${WHOD[s.who]}</span></p><p>${s.d}</p>
     <div class="acts"><a class="btn sm" href="#" data-wa="Olá, Marisa! Gostaria de saber mais sobre: ${s.t}.">Solicitar informações</a><a class="btn sm ghost" href="#journey" data-go="journey">Planejar a viagem</a>${s.tk?`<a class="btn sm ghost" href="#tickets" data-go="tickets" data-tk="${s.tk==='aluguel'?'carros':s.tk}">Ver em Gordon Tickets</a>`:''}</div></div></div></div></div>`).join('')}</div></div>`}).join('');
  },
+ edges(){const tb=$('#phs');if(!tb)return;const m=tb.scrollWidth-tb.clientWidth;tb.classList.toggle('m-l',m>2&&tb.scrollLeft>4);tb.classList.toggle('m-r',m>2&&tb.scrollLeft<m-4)},
  ind(){const t=$('.sv-ind',$('#phs')),b=$('#phs [aria-selected="true"]');if(!t||!b||!b.offsetWidth)return;t.style.setProperty('--ix',b.offsetLeft+'px');t.style.setProperty('--iw',b.offsetWidth+'px')},
  sync(anim){
   $$('#phs [data-p]').forEach(b=>{const on=b.dataset.p===this.ph;b.setAttribute('aria-selected',on);b.tabIndex=on?0:-1});
   $$('#svImgs img').forEach(i=>{const on=i.dataset.ph===this.ph;i.classList.toggle('on',on);i.setAttribute('aria-hidden',!on)});
   $$('#phBody .sv-pane').forEach(pn=>{const on=pn.dataset.pane===this.ph;const was=!pn.hidden;pn.hidden=!on;if(on&&(anim||!was)){pn.classList.remove('in');void pn.offsetWidth;pn.classList.add('in')}});
   $$('#phBody .sv-item').forEach(it=>{const on=it.dataset.item===this.openId;it.classList.toggle('open',on);$('[data-sv]',it).setAttribute('aria-expanded',on)});
-  this.ind();const t=$('#phs [aria-selected="true"]');if(t&&$('#phs').scrollWidth>$('#phs').clientWidth)t.scrollIntoView({inline:'nearest',block:'nearest'});
+  this.ind();const tb=$('#phs'),t=$('#phs [aria-selected="true"]');if(t&&tb.scrollWidth>tb.clientWidth+1){const rm=matchMedia('(prefers-reduced-motion:reduce)').matches;tb.scrollTo({left:Math.max(0,t.offsetLeft-(tb.clientWidth-t.offsetWidth)/2),behavior:(rm||!anim)?'auto':'smooth'})}this.edges();
  }};
 PAGE_HOOKS.services=()=>Svc.sync(false);
 (function(){
@@ -119,7 +120,8 @@ PAGE_HOOKS.services=()=>Svc.sync(false);
   const body=$('#phBody');
   body.addEventListener('click',e=>{const b=e.target.closest('[data-sv]');if(!b)return;const id=b.dataset.sv;Svc.openId=Svc.openId===id?'':id;Svc.sync(false)});
   body.addEventListener('keydown',e=>{if(e.key!=='Escape'||!Svc.openId)return;const b=$('#sb-'+Svc.openId);Svc.openId='';Svc.sync(false);if(b)b.focus()});
-  window.addEventListener('resize',()=>Svc.ind());
+  tabs.addEventListener('scroll',()=>Svc.edges(),{passive:true});
+  window.addEventListener('resize',()=>{Svc.ind();Svc.edges()});
   Svc.sync(false);
 })();
 
