@@ -1,0 +1,8 @@
+Gordon Travel V2 - pacote para revisão (NÃO publicado, sem push).
+Estrutura (raiz do repositório / GitHub Pages /gordon-travel-v2/):
+ index.html, favicon.ico, favicon-16x16.png, favicon-32x32.png, apple-touch-icon.png
+ assets/lanyard.bundle.js  (Lanyard React Bits, versão vanilla Three.js; carregado só na Home)
+ lanyard-source/ (lanyard-src.js, entry.js)  | source/ (build.py + v3/ fontes)
+Dependências do Lanyard: three@0.170.0 (bundle com esbuild). Sem React.
+Pendências: autorização de fotos (pessoas/crianças), reconfirmar contatos/portal/Facebook,
+dados legais da Política (marcados "Pendente"), selo "Protótipo para aprovação", decisão sobre Google Fonts.

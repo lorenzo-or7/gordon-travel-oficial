@@ -35,10 +35,10 @@ const TFILTERS=[['todos','Tudo'],['parques','Parques'],['hospedagem','Hospedagem
 const CHAPTERS=[
  {y:'2013',t:'A viagem que despertou um sonho',d:'Marisa Gordon viajou aos Estados Unidos com o marido e as duas filhas para cerca de 20 dias de férias, incluindo a experiência Disney. A viagem marcou a família e despertou o desejo de viver nos Estados Unidos.',k:'m_antiga',cap:'Registro de família',lb:'2013',by:'2013'},
  {y:'Depois',t:'Uma mudança de caminho',d:'De volta ao Brasil, depois de anos no setor bancário, Marisa passou por uma mudança profissional. Fez novas viagens aos Estados Unidos, inclusive para visitar uma familiar em Miami, e começou a desenvolver atividades comerciais ligadas a elas. Gisele, antiga colega do Santander, a incentivou a explorar o turismo e a orientação de viajantes.',k:'m_familia',cap:'Marisa Gordon com familiares',lb:'Depois da viagem',by:'Depois'},
- {y:'2014',t:'O início da Gordon Travel',d:'Em outubro de 2014, Marisa acompanhou duas adolescentes em uma viagem a Orlando. A experiência marcou o início de sua atuação com a Gordon Travel.',k:'embarque',cap:'Ilustração',alt:'Cartão de embarque da Gordon Travel, ilustração',lb:'2014',by:'2014'},
+ {y:'2014',t:'O início da Gordon Travel',d:'Em outubro de 2014, Marisa acompanhou duas adolescentes em uma viagem a Orlando. A experiência marcou o início de sua atuação com a Gordon Travel.',k:'cp03',cap:'Registro do início da Gordon Travel.',alt:'Marisa Gordon e as primeiras clientes da agência posando diante de uma entrada temática de parque em Orlando, decorada para o fim de ano',lb:'2014',by:'2014'},
  {y:'2015',t:'Um novo capítulo nos Estados Unidos',d:'No fim do ano, depois de mudanças profissionais na família, Marisa, o marido e as filhas se mudaram para os Estados Unidos. A atividade turística passou a ocupar um espaço ainda maior na vida da família.',k:'ch_aero',cap:'Ilustração conceitual',alt:'Ilustração conceitual de um balcão da Gordon Travel em um aeroporto ao pôr do sol, com avião e placa de embarque ao fundo',lb:'2015',by:'2015'},
- {y:'Depois',t:'Crescimento e novas experiências',d:'A Gordon Travel ampliou sua atuação para planejamento personalizado, viagens em grupo, orientação turística e outros serviços.',k:'ch_plan',cap:'Ilustração conceitual',alt:'Ilustração conceitual de uma mesa de planejamento de viagens, com notebook, globo, mapa-múndi, passaporte, passagens e a vista de Orlando pela janela',lb:'Anos seguintes',by:'Depois'},
- {y:'Hoje',t:'Histórias que continuam',d:'O atendimento personalizado, o conhecimento do destino e a atenção ao perfil de cada viajante continuam orientando a proposta da Gordon Travel.',k:'m_noite',cap:'Marisa Gordon em Orlando',lb:'Hoje',by:'Hoje',sig:true}
+ {y:'Depois',t:'Crescimento e novas experiências',d:'A Gordon Travel ampliou sua atuação para planejamento personalizado, viagens em grupo, orientação turística e outros serviços.',k:'cp05',cap:'Primeiro serviço de receptivo da Gordon Travel.',alt:'Quatro pessoas sorrindo juntas em uma foto de grupo em Orlando, registro do primeiro serviço de receptivo da Gordon Travel',lb:'Anos seguintes',by:'Depois'},
+ {y:'Hoje',t:'Histórias que continuam',d:'O atendimento personalizado, o conhecimento do destino e a atenção ao perfil de cada viajante continuam orientando a proposta da Gordon Travel.',k:'cp06',cap:'Marisa Gordon · Hoje.',alt:'Marisa Gordon sorrindo, de camisa listrada azul e branca e orelhinhas pretas com detalhes vermelhos',lb:'Hoje',by:'Hoje',sig:true}
 ];
 const VALUES=[['Atendimento humano','Uma conversa próxima, que considera quem está viajando.','users'],['Planejamento cuidadoso','Cada detalhe pensado de acordo com o ritmo da viagem.','calendar'],['Confiança','Relações construídas com atenção e responsabilidade.','check'],['Transparência','Informações claras sobre serviços e parceiros.','eye'],['Conhecimento do destino','Orientações que consideram a experiência com Orlando.','pinned'],['Personalização','Não existe um único roteiro ideal para todas as famílias.','sparkles'],['Memórias em família','Experiências que ganham significado quando são compartilhadas.','camera']];
 const CERTS=[{k:'cert1',t:'Orlando Expert Certification',i:'Orlando Travel Academy / Visit Orlando',dt:'12 de maio de 2020',m:'Orlando Travel Academy / Visit Orlando · 12 de maio de 2020',alt:'Certificado de conclusão da Orlando Expert Certification em nome de Marisa Gordon, 12 de maio de 2020'},{k:'cert2',t:'Especialização em grupos',i:'SunCoastUSA Operadora',dt:'7 de maio de 2020',m:'SunCoastUSA Operadora · treinamento de 7 de maio de 2020',alt:'Certificado de participação no treinamento de especialização em grupos da SunCoastUSA Operadora, 7 de maio de 2020'}];
@@ -78,6 +78,19 @@ const STORIES2=[
  ['castelos','familia','Grande grupo com camisetas combinando, acenando em frente a um castelo']
 ].map((a,i)=>({k:'a'+String(i+1).padStart(2,'0'),tags:[a[0],a[1]].filter(Boolean),alt:a[2]}));
 STORIES.push(...STORIES2);
+const STORIES3=[
+ ['Três mulheres posando juntas diante de uma entrada temática de parque, decorada para o fim de ano'],
+ ['Quatro pessoas sorrindo juntas em uma foto de grupo em Orlando'],
+ ['Grupo de pessoas posando em uma rua de parque à noite, com palmeiras e luzes ao fundo'],
+ ['Grupo de visitantes posando em um parque diante de uma grande árvore, em dia de céu azul'],
+ ['Grande grupo posando em um palco de teatro com cortinas vermelhas, ao lado de um personagem fantasiado'],
+ ['Grupo posando em frente a um castelo ao entardecer, em um parque temático'],
+ ['Grupo de viajantes posando com várias malas coloridas em um aeroporto'],
+ ['Grupo com camisetas vermelhas combinando posando em uma rua de parque'],
+ ['Grupo de crianças e adultos posando em um teatro com cortinas vermelhas, ao lado de um personagem fantasiado'],
+ ['Grande grupo vestido de branco posando em frente a um castelo, em dia nublado']
+].map((a,i)=>({k:'n'+String(i+1).padStart(2,'0'),tags:[],alt:a[0]}));
+STORIES.push(...STORIES3);
 
 const OFFICIAL={visit:['Visit Orlando','https://www.visitorlando.com/'],esta:['Programa ESTA (CBP)','https://esta.cbp.dhs.gov/'],state:['Departamento de Estado dos EUA','https://travel.state.gov/'],disney:['Walt Disney World','https://disneyworld.disney.go.com/'],universal:['Universal Orlando Resort','https://www.universalorlando.com/']};
 const GTOPICS=[['todos','Tudo'],['planejamento','Planejamento'],['parques','Parques'],['documentos','Documentos'],['transporte','Transporte'],['hospedagem','Hospedagem'],['familia','Em família']];

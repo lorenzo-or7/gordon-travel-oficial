@@ -32,15 +32,18 @@ lb.el.addEventListener('touchend',e=>{if(tx==null)return;const dx=e.changedTouch
 const ST_ROWS=[
  {t:'f', k:['v02','a01','v10']},
  {t:'r', k:['v04','a03','a02']},
+ {t:'r', k:['n01','n02','n03']},
  {t:'r', k:['a04','a06','a10','a11']},
  {t:'sr',k:['a08','v05','v06']},
+ {t:'r', k:['n04','n05','n06','n07']},
  {t:'r', k:['v09','a09','a12']},
  {t:'sl',k:['v01','v08','a13']},
+ {t:'r', k:['n08','n09','n10']},
  {t:'r', k:['a14','a15','a16','a17']},
  {t:'sr',k:['a05','v03','v07']},
  {t:'r', k:['a07','a18','a19','a20']}
 ];
-const ST_M2=new Set(['v02','v04','a08','v05','v06','v09','v01','v08','a17','a05','v03','v07']); // ocupam a largura toda no mobile
+const ST_M2=new Set(['v02','v04','a08','v05','v06','v09','v01','v08','a17','a05','v03','v07','n02','n05','n08','n10']); // ocupam a largura toda no mobile
 const ST_ORDER=ST_ROWS.flatMap(r=>r.k);
 const St={
  by:Object.fromEntries(STORIES.map(s=>[s.k,s])),
@@ -281,6 +284,7 @@ const Gd={cat:'planejamento',q:'',toks:[],sv:{},cf:null,
    ticket:'<path d="M2 9a3 3 0 0 1 0 6v2a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-2a3 3 0 0 1 0-6V7a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2z"/><path d="M13 5v2M13 17v2M13 11v2"/>',
    bed:'<path d="M2 20v-8a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v8M4 10V6a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v4M12 4v6M2 18h20"/>',
    msg:'<path d="M21 12a8 8 0 0 1-11.6 7.1L3 21l1.9-6.2A8 8 0 1 1 21 12z"/>',
+   fb:'<path d="M14 8.5V7a1 1 0 0 1 1-1h2V3h-2.5A4.5 4.5 0 0 0 10 7.5v1H8v3h2V21h3.5v-9.5h2.5l.5-3z"/>',
    ig:'<rect x="2.5" y="2.5" width="19" height="19" rx="5"/><circle cx="12" cy="12" r="4"/><path d="M17.5 6.5h.01"/>',
    mail:'<rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 7l-10 6L2 7"/>',
    yt:'<rect x="2" y="5" width="20" height="14" rx="4"/><path d="M10 9l5 3-5 3z"/>',
@@ -297,6 +301,7 @@ const Gd={cat:'planejamento',q:'',toks:[],sv:{},cf:null,
   $('#ctOpts').innerHTML=SUBJ.map((s,i)=>`<label class="ct-opt"><input type="radio" name="ctSubj" value="${s[0]}" ${i===0?'checked':''}><span class="ct-oc">${ic(s[2])}<span class="ct-on">${s[1]}</span><span class="ct-ok" aria-hidden="true">${ic('chk')}</span></span></label>`).join('');
   $('#ctList').innerHTML=`
    <li><span class="ct-li">${ic('ig')}</span><div class="ct-lt"><b>Instagram</b><span>${c.instagramHandle}</span></div><div class="ct-la"><a class="ct-ln" href="${c.instagram}" target="_blank" rel="noopener noreferrer">Abrir perfil${ic('ext')}<span class="ct-sr"> (abre em nova aba)</span></a></div></li>
+   <li><span class="ct-li">${ic('fb')}</span><div class="ct-lt"><b>Facebook</b><span>facebook.com/gordontravel</span></div><div class="ct-la"><a class="ct-ln" href="${c.facebook}" target="_blank" rel="noopener noreferrer">Abrir página${ic('ext')}<span class="ct-sr"> (abre em nova aba)</span></a></div></li>
    <li><span class="ct-li">${ic('mail')}</span><div class="ct-lt"><b>E-mail</b><span>${c.email}</span></div><div class="ct-la"><a class="ct-ln" href="mailto:${c.email}">Escrever e-mail${ic('ext')}</a><button type="button" class="ct-ln" data-cp="${c.email}">Copiar endereço${ic('copy')}</button></div></li>
    <li><span class="ct-li">${ic('yt')}</span><div class="ct-lt"><b>YouTube</b><span>@gordontravel6806</span></div><div class="ct-la"><a class="ct-ln" href="${c.youtube}" target="_blank" rel="noopener noreferrer">Abrir canal${ic('ext')}<span class="ct-sr"> (abre em nova aba)</span></a></div></li>`;
   /* mensagem: sempre texto, nunca HTML */

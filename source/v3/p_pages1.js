@@ -126,11 +126,18 @@ PAGE_HOOKS.services=()=>Svc.sync(false);
 /* ===== Tickets ===== */
 const Tk={f:'todos',
  detail(id,opener){const t=TICKETS.find(x=>x.id===id);if(!t)return;
-  Modal.open(`<div class="mm"><div class="im"><img data-k="${t.k}" alt="${esc(t.alt)}"></div><div class="tx"><span class="tag">Produto de parceiro</span><h3>${t.n}</h3><p class="muted">${t.l}</p>
-  <div><span class="lbl">O que considerar</span><ul style="margin-top:.6rem">${t.c.map(c=>`<li>${c}</li>`).join('')}</ul></div>
-  <div>${t.f.map(([q,a])=>`<details><summary style="font-size:1.15rem;min-height:48px">${q}</summary><div class="in"><p>${a}</p></div></details>`).join('')}</div>
-  <div class="acts"><a class="btn" href="${CONFIG.portal}" target="_blank" rel="noopener">Acessar o portal parceiro</a><a class="btn ghost" href="#" data-wa="Olá, Marisa! Tenho dúvidas sobre: ${t.n}.">Falar com a equipe</a></div>
-  <p class="disc">Preços e disponibilidade ficam apenas no portal. Este site não vende nem emite ingressos.</p></div></div>`,opener)},
+  const cat=(TFILTERS.find(f=>f[0]===t.cat)||['',''])[1];
+  const ico=p=>`<svg viewBox="0 0 24 24" aria-hidden="true">${p}</svg>`;
+  Modal.open(`<article class="tkm">
+  <header class="tkm-h"><p class="tkm-cat"><span>${esc(cat)}</span><span class="tag">Produto de parceiro</span></p><h3 id="mTitle" data-mt>${t.n}</h3></header>
+  <p class="tkm-lede">${t.l}</p>
+  <section class="tkm-blk" aria-labelledby="mConsid"><h4 id="mConsid">${ico('<path d="M12 3l2.4 5.2 5.6.7-4.1 3.9 1.1 5.6L12 15.6 7 18.4l1.1-5.6L4 8.9l5.6-.7z"/>')}O que considerar</h4>
+   <ul>${t.c.map(c=>`<li>${ico('<path d="M5 12.5l4.2 4.2L19 7"/>')}<span>${c}</span></li>`).join('')}</ul></section>
+  <section class="tkm-blk" aria-labelledby="mFaq"><h4 id="mFaq">${ico('<circle cx="12" cy="12" r="9"/><path d="M9.6 9.3a2.5 2.5 0 1 1 3.4 2.3c-.7.3-1 .9-1 1.6M12 17h.01"/>')}Perguntas frequentes</h4>
+   <div class="tkm-faq">${t.f.map(([q,a])=>`<details><summary>${q}</summary><div class="in"><p>${a}</p></div></details>`).join('')}</div></section>
+  <p class="tkm-note">${ico('<circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/>')}<span>Preços e disponibilidade ficam apenas no portal. Este site não vende nem emite ingressos.</span></p>
+  <footer class="tkm-acts"><a class="btn" href="${CONFIG.portal}" target="_blank" rel="noopener">Acessar o portal parceiro</a><a class="btn ghost" href="#" data-wa="Olá, Marisa! Tenho dúvidas sobre: ${t.n}.">Falar com a equipe</a></footer>
+  </article>`,opener)},
  render(){
   let n=0;$$('#tkGrid .prod').forEach(p=>{const ok=this.f==='todos'||p.dataset.c===this.f;p.classList.toggle('hide',!ok);if(ok)n++});
   $$('#tkChips .chip').forEach(c=>c.setAttribute('aria-pressed',c.dataset.f===this.f));
@@ -169,18 +176,36 @@ const Tk={f:'todos',
   if(document.fonts&&document.fonts.ready)document.fonts.ready.then(()=>place(cur,false));
 })();
 
-/* ===== Home: Meet Marisa interativo ===== */
+/* ===== Home: Meet Marisa · credencial 3D (Lanyard, carregado sob demanda) ===== */
 (function(){
-  const TL=['2013','Depois da viagem','2014','2015','Crescimento','Hoje'];
-  const M=CHAPTERS.map((c,i)=>[TL[i],c.t,c.d]);
-  const tabs=$('#mTabs'),body=$('#mBody');
-  tabs.innerHTML=M.map((m,i)=>`<button type="button" class="chip" role="tab" aria-pressed="${i===0}" data-m="${i}">${m[0]}</button>`).join('');
-  function sel(i){$$('.chip',tabs).forEach((c,k)=>c.setAttribute('aria-pressed',k===i));body.innerHTML=`<div class="mbody"><div class="big">${M[i][1]}</div><p>${M[i][2]}</p></div>`}
-  tabs.addEventListener('click',e=>{const b=e.target.closest('[data-m]');if(b)sel(+b.dataset.m)});
-  sel(0);
-  const mf=$('.meet3 .mf');
-  if(mf&&!matchMedia('(prefers-reduced-motion:reduce)').matches&&matchMedia('(hover:hover)').matches){
-    mf.addEventListener('mousemove',e=>{const r=mf.getBoundingClientRect();const x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;mf.style.transform=`perspective(900px) rotateY(${x*7}deg) rotateX(${-y*7}deg)`});
-    mf.addEventListener('mouseleave',()=>{mf.style.transform=''});
+  const root=$('#lny');if(!root)return;
+  const cv=$('#lnyCv'),flipB=$('#lnyFlip'),flipT=$('#lnyFlipT'),hint=$('#lnyHint'),imgs=$$('#lnyFb img');
+  const rm=matchMedia('(prefers-reduced-motion:reduce)');
+  let inst=null,back=false,loaded=false,tried=false;
+  const setBack=b=>{back=b;flipB.setAttribute('aria-pressed',b);flipT.textContent=b?'Ver a frente':'Ver o verso';imgs[0].hidden=b;imgs[1].hidden=!b};
+  const fallback=()=>{root.classList.add('is-fb');hint.textContent=rm.matches?'Credencial Gordon Travel':'Credencial Gordon Travel';};
+  const webgl=()=>{try{const c=document.createElement('canvas');return !!(window.WebGLRenderingContext&&(c.getContext('webgl2')||c.getContext('webgl')))}catch(e){return false}};
+  const need=()=>window.GTLanyard?Promise.resolve():new Promise((res,rej)=>{
+    const s=document.createElement('script'),inl=$('#lnySrc');
+    if(inl){s.textContent=inl.textContent;document.head.appendChild(s);res()}
+    else{s.src=window.GT_LNY_URL||'assets/lanyard.bundle.js';s.onload=res;s.onerror=rej;document.head.appendChild(s)}});
+  function boot(){
+    if(tried)return;tried=true;
+    if(rm.matches||!webgl()){fallback();return}
+    need().then(()=>{
+      const K=k=>IMGS[k].u;
+      inst=window.GTLanyard.mount(cv,{frontImage:K('lny_front'),backImage:K('lny_back'),strapImage:K('lny_strap'),cardColor:'#0D1D29',strapColor:'#0D1D29',finish:'glossy',metal:'gold',orientation:'portrait',size:.54,strapLength:.42,strapWidth:.62,gravity:1,damping:.5,elasticity:.5,breeze:.35,interactive:true,intro:true});
+      if(!inst.ok){inst=null;fallback();return}
+      loaded=true;
+      const cn=cv.querySelector('canvas');if(cn)cn.setAttribute('aria-hidden','true');
+    }).catch(()=>{inst=null;fallback()});
   }
+  flipB.addEventListener('click',()=>{
+    if(inst&&loaded){inst.flip();setBack(!back)}else setBack(!back);
+  });
+  setInterval(()=>{if(inst&&loaded&&!document.hidden){const b=inst.isBack();if(b!==back)setBack(b)}},300);
+  /* rede de segurança: se uma notificação do IntersectionObserver se perder (rolagem suave + thread ocupada), retoma a simulação quando o palco estiver à vista */
+  setInterval(()=>{if(inst&&loaded&&root.offsetParent!==null)inst.kick()},1000);
+  rm.addEventListener&&rm.addEventListener('change',()=>{if(rm.matches&&inst){inst.destroy();inst=null;cv.innerHTML='';fallback()}});
+  if('IntersectionObserver' in window){const io=new IntersectionObserver(en=>{if(en[0].isIntersecting){boot();io.disconnect()}},{threshold:.2});io.observe(root)}else boot();
 })();

@@ -1,7 +1,7 @@
 
 const IMGS=/*IMGS_JSON*/null;
 /* Contatos recuperados do site antigo. RECONFIRMAR com a agência antes da publicação. */
-const CONFIG={whatsapp:'13213109481',whatsappLabel:'+1 (321) 310-9481',email:'marisa@gordontravel.com.br',instagram:'https://www.instagram.com/gordontravelusa/',instagramHandle:'@gordontravelusa',youtube:'https://www.youtube.com/@gordontravel6806',site:'gordontravel.com.br',
+const CONFIG={whatsapp:'13213109481',whatsappLabel:'+1 (321) 310-9481',email:'marisa@gordontravel.com.br',instagram:'https://www.instagram.com/gordontravelusa/',facebook:'https://www.facebook.com/gordontravel/',instagramHandle:'@gordontravelusa',youtube:'https://www.youtube.com/@gordontravel6806',site:'gordontravel.com.br',
 portal:'https://gordontravel.suncoastusa.com.br/?chave=74794711-9C21-4E37-9003-563EB1C08EF1'};
 const $=(s,r=document)=>r.querySelector(s), $$=(s,r=document)=>[...r.querySelectorAll(s)];
 const store={get(k){try{return localStorage.getItem(k)}catch(e){return null}},set(k,v){try{localStorage.setItem(k,v)}catch(e){}}};
@@ -69,7 +69,7 @@ matchMedia('(min-width:1181px)').addEventListener('change',e=>{if(e.matches)clos
 window.PAGE_HOOKS={};
 /* modal genérico (detalhes de produto) */
 const Modal={el:null,opener:null,
-  open(html,opener){this.opener=opener||document.activeElement;const m=this.el;$('.mbody',m).innerHTML=html;m.hidden=false;document.body.style.overflow='hidden';hydrate(m);$('.mclose',m).focus()},
+  open(html,opener){this.opener=opener||document.activeElement;const m=this.el;$('.mbody',m).innerHTML=html;const mt=$('[data-mt]',m);if(mt)$('.mbox',m).setAttribute('aria-labelledby',mt.id);m.hidden=false;$('.mbox',m).scrollTop=0;document.body.style.overflow='hidden';hydrate(m);$('.mclose',m).focus()},
   close(){this.el.hidden=true;document.body.style.overflow='';if(this.opener&&this.opener.focus)this.opener.focus({preventScroll:true})}};
 Modal.el=$('#modal');
 $('.mclose',Modal.el).addEventListener('click',()=>Modal.close());
